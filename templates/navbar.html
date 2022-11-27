@@ -1,0 +1,66 @@
+<style>
+    nav {
+        padding: 20px;
+        background-color: dimgrey;
+        color: aliceblue;
+        margin-bottom: 20px;
+    }
+
+    .nav-list {
+        display: inline-flex;
+
+    }
+
+    .nav-list li {
+        display: inline;
+        margin-left: 20px;
+    }
+
+    .nav-list li a {
+        color: aliceblue;
+    }
+</style>
+
+<nav>
+    <ul class="nav-list">
+        <li>
+            <a href="/">
+                home
+            </a>
+        </li>
+        <li>
+            <a href="{% url 'articles:article_list' %}">
+                articles
+            </a>
+        </li>
+        <li>
+            <a href="{% url 'articles:article_create' %}">
+                add new article
+            </a>
+        </li>
+        <li>
+            <a href="{% url 'recipes:list' %}">
+                recipes
+            </a>
+        </li>
+        <li>
+            <a href="{% url 'recipes:create' %}">
+                add new recipe
+            </a>
+        </li>
+    </ul>
+    <ul class="nav-list" style="float: right">
+        {% if request.user.is_authenticated %}
+            <li>
+                {{ request.user }}
+            </li>
+            <li>
+                <a href="{% url 'accounts:logout' %}">Logout</a>
+            </li>
+        {% else %}
+            <li>
+                <a href="{% url 'accounts:login' %}">Login</a>
+            </li>
+        {% endif %}
+    </ul>
+</nav>

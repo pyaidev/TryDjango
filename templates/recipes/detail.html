@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block title %}Recipes detail{% endblock %}
+
+
+{% block content %}
+
+    <h2>{{ object.name }}</h2>
+    {% if object.img %}
+    <img src="{{ object.img.url }}" alt="">
+    {% endif %}
+
+    <p>author: {{ object.user }}</p>
+    <p>
+        tags: {% for tag in object.tags.all %}#{{ tag }} {% endfor %}
+    </p>
+    <hr>
+
+    {% if object.recipeingredient_set.all %}
+        <h3>Ingredients</h3>
+        <ol>
+            {% for inredient in object.recipeingredient_set.all %}
+                <li>{{ inredient.ingredient_name }} -> {{ inredient.quantity }} {{ inredient.get_unit_display.lower }}</li>
+            {% endfor %}
+
+        </ol>
+    {% else %}
+        <p style="color: darkred">this recipe has no ingredient</p>
+    {% endif %}
+
+
+    {% if request.user.id == object.user_id %}
+        <hr>
+        <div>
+            <a href="{% url 'recipes:edit' object.id %}" style="color: dodgerblue">Edit</a>
+            <a href="{% url 'recipes:delete' object.id %}" style="color: red">Delete</a>
+        </div>
+    {% endif %}
+
+
+{% endblock %}

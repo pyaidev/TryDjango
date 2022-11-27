@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block title %}Article detail{% endblock %}
+
+
+{% block content %}
+
+    <h1>{{ object.title }} ({{ object.id }})</h1>
+    {% if object.content %}
+        <p>{{ object.content }}</p>
+    {% endif %}
+{% endblock %}

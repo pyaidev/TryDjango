@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+
+{% block title %}Article create{% endblock %}
+
+{% block content %}
+    {% if not object %}
+        <form method="post">
+            {% csrf_token %}
+            {#            <input type="text" name="title">#}
+            {#            <input type="text" name="content">#}
+
+
+            {{ form.as_p }}
+            <button type="submit">Add article</button>
+        </form>
+    {% else %}
+        added: <a href="{% url 'articles:article_detail' object.id %}">{{ object.title }}</a>
+    {% endif %}
+{% endblock %}
+
